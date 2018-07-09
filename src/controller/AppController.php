@@ -1,21 +1,40 @@
 <?php
 
+    /**
+     * This is the AppController
+     * Every controller should inherit from this class
+     * Notice the 'set', '__construct' and '__destruct' methods are final and shouldn't be overwritten by controllers
+     */
+    
     class AppController{
         private $variables = [];
         private $methodname = [];
         
-        //pass a variable to the view
+        /**
+         * Adds a variable to the variable list that will be passed through the view
+         * @param {array} $arr The array keys will be the array name and the value its value
+         */
         public final function set($arr){
             foreach($arr as $name => $value){
                 $this->variables[$name] = $value;
             }
         }
         
+        /**
+         * The controller's constructor
+         * Here we set the corresponding view element that belongs to the controller's method
+         * @param {string} $methodName The name of the controller's method
+         */
         public final function __construct($methodName){
             $this->set(['viewElement' => $methodName]);
         }
         
-        //create the variables for the view and than include the template
+        
+        /**
+         * The controller's destructor
+         * Here we create the variables that have been set in the 'set' method that should be accessible in the view
+         * Afterwards we include the correct template
+         */
         public final function __destruct() {
             //create variables
             foreach($this->variables as $name => $value ){

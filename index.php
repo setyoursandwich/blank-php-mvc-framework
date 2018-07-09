@@ -34,11 +34,9 @@
     /**
      * make the controller string match the controller object: take out unwanted Characters and ad the word 'Controller' to the end
      */
-    $controllerName = preg_replace("/[^A-Za-z0-9?!]/", '', $controllerName).'Controller'; 
-    require_once 'src/controller/'.$controllerName.'.php';
+    $controllerName = preg_replace("/[^A-Za-z0-9?!]/", '', $controllerName); 
 
     
-    //create new object of the controller and give the method name so it can be loaded in the view
     /**
      * get the correct method name
      * if an explicit method name is given in the url use that on
@@ -59,6 +57,7 @@
      * Call the method
      */
     $controllerName .= 'Controller';
+    require_once 'src/controller/'.$controllerName.'.php';
     require_once 'src/controller/'.$controllerName.'.php';
     
     $controller = new $controllerName($method);
